@@ -21,6 +21,7 @@ public class TransacaoController {
 
     @PostMapping
     public ResponseEntity<?> createTransacao(@RequestBody @Valid RequestTransacaoDto dto){
+        log.info("transaco recebida: {}", dto.toString());
         transacaoService.addTransacao(dto);
         return ResponseEntity.created(null).build();
     }
