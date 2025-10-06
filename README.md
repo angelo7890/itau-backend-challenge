@@ -55,3 +55,24 @@ O desafio pedia que a API fosse capaz de:
 - **Actuator:** endpoints `/health`, `/info` e `/metrics` configurados para monitoramento.  
 
 ---
+
+## 🛠️ Como rodar o projeto 
+
+### 🔹 Passo 1 – Clonar o repositório
+```bash
+git clone https://github.com/angelo7890/itau-backend-challenge.git
+cd itau-backend-challenge
+```
+
+---
+
+## 📖 Documentação da API
+A documentação Swagger estará disponível em:  
+
+👉 `http://localhost:8080/swagger-ui.html`  
+
+---
+
+## 👨‍💻 Autor
+**Angelo Rodrigues**    
+📎 [GitHub](https://github.com/angelo7890)
