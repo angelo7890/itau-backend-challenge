@@ -5,30 +5,25 @@ import java.util.DoubleSummaryStatistics;
 
 public class ResponseEstatisticasDto {
 
-    private Long count;
-
-    private BigDecimal sum;
-
-    private BigDecimal avg;
-
-    private BigDecimal min;
-
-    private BigDecimal max;
-
+    private long count;
+    private double sum;
+    private double avg;
+    private double min;
+    private double max;
 
     public ResponseEstatisticasDto(DoubleSummaryStatistics statistics) {
-        if (statistics == null) {
-            this.count = 0L;
-            this.sum = BigDecimal.ZERO;
-            this.avg = BigDecimal.ZERO;
-            this.min = BigDecimal.ZERO;
-            this.max = BigDecimal.ZERO;
-            return;
+        if (statistics == null || statistics.getCount() == 0) {
+            this.count = 0;
+            this.sum = 0.0;
+            this.avg = 0.0;
+            this.min = 0.0;
+            this.max = 0.0;
+        } else {
+            this.count = statistics.getCount();
+            this.sum = statistics.getSum();
+            this.avg = statistics.getAverage();
+            this.min = statistics.getMin();
+            this.max = statistics.getMax();
         }
-        this.count = statistics.getCount();
-        this.sum = BigDecimal.valueOf(statistics.getSum());
-        this.avg = BigDecimal.valueOf(statistics.getAverage());
-        this.min = BigDecimal.valueOf(statistics.getMin());
-        this.max = BigDecimal.valueOf(statistics.getMax());
     }
 }

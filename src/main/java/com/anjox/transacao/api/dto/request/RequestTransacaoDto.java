@@ -3,5 +3,5 @@
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-public record RequestTransacaoDto(BigDecimal valor, OffsetDateTime dataHora) {
+public record RequestTransacaoDto(Double valor, OffsetDateTime dataHora) {
 }

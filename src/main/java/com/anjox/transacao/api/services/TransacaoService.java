@@ -1,6 +1,7 @@
 package com.anjox.transacao.api.services;
 
 import com.anjox.transacao.api.dto.request.RequestTransacaoDto;
+import com.anjox.transacao.api.dto.response.ResponseEstatisticasDto;
 import com.anjox.transacao.api.exceptions.UnprocessableEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public class TransacaoService {
             log.error("data e hora da transacao esta invalida");
             throw new UnprocessableEntity("data e hora invalidos");
         }
-        if (dto.valor().compareTo(BigDecimal.ZERO)< 0) {
+        if (dto.valor() < 0) {
             log.error("valor da transacao deve ser maior que zero");
             throw new UnprocessableEntity("valor invalido");
         }
@@ -39,5 +40,24 @@ public class TransacaoService {
     public void deleteTransacao() {
         log.info("limpando lista de transacoes");
         transacoes.clear();
+    }
+
+    public ResponseEstatisticasDto getEstatisticas() {
+
+        log.info("buscando transacoes do ultimo minuto");
+
+        OffsetDateTime dataHora = OffsetDateTime.now().minusSeconds(TRANSACTION_VALIDITY_SECONDS);
+
+        var itens = transacoes.
+                stream().
+                    filter(t -> t.dataHora().isAfter(dataHora)).toList();
+
+        var sumary = itens
+                .stream()
+                    .mapToDouble(RequestTransacaoDto::valor)
+                        .summaryStatistics();
+
+        log.info("retornando transacoes do ultimo minuto");
+        return  new ResponseEstatisticasDto(sumary);
     }
 }
