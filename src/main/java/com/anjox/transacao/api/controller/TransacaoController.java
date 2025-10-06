@@ -38,7 +38,8 @@ public class TransacaoController {
                                     schema = @Schema(implementation = RequestTransacaoDto.class)
                             )
                     ),
-                    @ApiResponse(responseCode = "422", description = "dados inválidos fornecidos")
+                    @ApiResponse(responseCode = "422", description = "dados inválidos fornecidos"),
+                    @ApiResponse(responseCode = "500", description = "erro interno no servidor")
             }
     )
     @PostMapping
