@@ -6,9 +6,8 @@ import com.anjox.transacao.api.exceptions.UnprocessableEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class TransacaoService {
     private final List<RequestTransacaoDto> transacoes = new ArrayList<>();
     private static final Logger log = LoggerFactory.getLogger(TransacaoService.class);
 
-    private static final long TRANSACTION_VALIDITY_SECONDS = 60L;
+    private static final long TRANSACTION_VALIDITY_SECONDS = 600L;
 
     public void addTransacao(RequestTransacaoDto dto) {
 
@@ -46,11 +45,11 @@ public class TransacaoService {
 
         log.info("buscando transacoes do ultimo minuto");
 
-        OffsetDateTime dataHora = OffsetDateTime.now().minusSeconds(TRANSACTION_VALIDITY_SECONDS);
+        OffsetDateTime dataHora = OffsetDateTime.now(ZoneOffset.UTC).minusSeconds(TRANSACTION_VALIDITY_SECONDS);
 
-        var itens = transacoes.
-                stream().
-                    filter(t -> t.dataHora().isAfter(dataHora)).toList();
+        var itens = transacoes.stream()
+                .filter(t -> t.dataHora().isAfter(dataHora))
+                .toList();
 
         var sumary = itens
                 .stream()
