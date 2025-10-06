@@ -17,6 +17,8 @@ public class TransacaoService {
     private final List<RequestTransacaoDto> transacoes = new ArrayList<>();
     private static final Logger log = LoggerFactory.getLogger(TransacaoService.class);
 
+    private static final long TRANSACTION_VALIDITY_SECONDS = 60L;
+
     public void addTransacao(RequestTransacaoDto dto) {
 
         log.info("iniciado o processamento da transacao: {}", dto.toString());
