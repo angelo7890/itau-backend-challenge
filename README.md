@@ -1,3 +1,4 @@
+![Badge](https://img.shields.io/badge/status-%20Finalizado-green)
 # 🧾 API de Transações – Desafio Itaú
 
 Esta API foi desenvolvida como **desafio de backend do Itaú**. O objetivo era construir uma aplicação capaz de:
